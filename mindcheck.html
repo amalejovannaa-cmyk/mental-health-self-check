@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Steady Health | Mental health self-assessment</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+:root{--bg:#f4f6f9;--surface:#fff;--ink:#14243a;--muted:#5a6b80;--line:#d9e0e8;--primary:#0f5c8a;--primary-ink:#fff;--tint:#e6f0f7;--warn:#fdecea;--warn-line:#c0392b;
+--s0:#2e8b6e;--s1:#b8962e;--s2:#d9822b;--s3:#c0503f;--s4:#9c2f48;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1824;--surface:#15243a;--ink:#e8eef5;--muted:#9fb0c3;--line:#2a3d57;--primary:#5aa9dc;--primary-ink:#08131f;--tint:#1b3350;--warn:#3a1f22}}
+:root[data-theme="dark"]{--bg:#0e1824;--surface:#15243a;--ink:#e8eef5;--muted:#9fb0c3;--line:#2a3d57;--primary:#5aa9dc;--primary-ink:#08131f;--tint:#1b3350;--warn:#3a1f22}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:var(--surface);border-bottom:1px solid var(--line)}
+.bar-in{max-width:880px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:1.1rem;background:none;border:none;color:var(--ink);cursor:pointer;padding:0;width:auto;margin:0}
+.brand svg{width:28px;height:28px}
+.hl{font-size:.9rem;color:var(--warn-line);font-weight:500;text-decoration:none}
+main{max-width:880px;margin:0 auto;padding:32px 20px 48px}
+h1{font-size:clamp(1.9rem,5vw,2.6rem);font-weight:600;line-height:1.2;margin:0 0 14px;letter-spacing:-.01em}
+h2{font-size:1.25rem;font-weight:600;margin:0 0 10px}
+h3{font-size:1rem;font-weight:600;margin:0 0 4px}
+p{margin:0 0 14px;max-width:68ch}
+.muted{color:var(--muted);font-size:.9rem}
+button{font:inherit;cursor:pointer;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:12px 16px;text-align:left;width:100%;margin:0 0 10px}
+button:hover{border-color:var(--primary)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+button.primary{background:var(--primary);color:var(--primary-ink);border-color:var(--primary);font-weight:500;text-align:center;width:auto;min-width:200px}
+button.secondary{width:auto;text-align:center}
+button.link{background:none;border:none;width:auto;padding:4px 0;color:var(--primary);text-decoration:underline;margin:0 0 12px}
+.hero{display:grid;gap:28px;grid-template-columns:1.2fr 1fr;align-items:start;margin-bottom:36px}
+@media(max-width:720px){.hero{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px;margin:0 0 16px}
+.facts{display:grid;gap:12px;grid-template-columns:repeat(3,1fr);margin:0 0 32px}
+@media(max-width:720px){.facts{grid-template-columns:1fr}}
+.facts .card{margin:0}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0 0 32px}
+.steps li{counter-increment:s;display:flex;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.steps li::before{content:counter(s);flex:none;width:28px;height:28px;border-radius:50%;background:var(--tint);color:var(--primary);font-weight:600;display:grid;place-items:center;font-size:.9rem}
+.notice{background:var(--tint);border-left:4px solid var(--primary);border-radius:4px;padding:14px 16px;margin:0 0 20px;font-size:.95rem}
+.crisis{background:var(--warn);border:1px solid var(--warn-line);border-radius:8px;padding:18px 20px;margin:0 0 20px}
+.crisis h2{color:var(--warn-line)}
+.progress{height:6px;background:var(--tint);border-radius:3px;margin:6px 0 8px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--primary);transition:width .2s}
+.qwrap{max-width:640px}
+.q{font-size:1.4rem;font-weight:500;line-height:1.35;margin:4px 0 22px}
+.opt.sel{border-color:var(--primary);background:var(--tint);font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:.85rem}
+.pill{display:inline-block;padding:2px 10px;border-radius:12px;color:#fff;font-weight:500;font-size:.85rem;white-space:nowrap}
+.meter{display:flex;gap:3px;margin:8px 0 4px}
+.meter i{flex:1;height:8px;border-radius:2px;background:var(--line)}
+.scroll{overflow-x:auto}
+ul{padding-left:20px;margin:0 0 12px}li{margin-bottom:6px}
+footer{border-top:1px solid var(--line);background:var(--surface)}
+.foot-in{max-width:880px;margin:0 auto;padding:22px 20px;font-size:.88rem;color:var(--muted)}
+.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line);font-size:.92rem}
+@media print{header,footer,.noprint{display:none!important}body{background:#fff;color:#000}.card{border-color:#999}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="bar-in">
+<button class="brand" onclick="go('home')" aria-label="Steady Health home"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0f5c8a"/><path d="M8 17h4l3-7 4 13 3-6h2" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Steady Health</button>
+<a class="hl" href="#help" onclick="go('help');return false">Need urgent help?</a>
+</div></header>
+<main id="app" aria-live="polite"></main>
+<footer><div class="foot-in">Steady Health provides screening questionnaires for information only. It is not a medical device and does not diagnose, treat or replace care from a qualified professional. Items are from the PHQ-9 and GAD-7, which are in the public domain for use without permission. Responses are stored only in your browser.</div></footer>
+<script>
+const OPTS=["Not at all","Several days","More than half the days","Nearly every day"];
+const SC=["var(--s0)","var(--s1)","var(--s2)","var(--s3)","var(--s4)"];
+const TESTS={
+phq:{name:"Depression screen",full:"PHQ-9",max:27,items:["Little interest or pleasure in doing things","Feeling down, depressed, or hopeless","Trouble falling or staying asleep, or sleeping too much","Feeling tired or having little energy","Poor appetite or overeating","Feeling bad about yourself, or that you are a failure or have let yourself or your family down","Trouble concentrating on things, such as reading or watching television","Moving or speaking so slowly that other people could notice, or being so restless that you move around much more than usual","Thoughts that you would be better off dead, or of hurting yourself in some way"],
+bands:[[4,"Minimal","No action needed. Keep up healthy routines."],[9,"Mild","Monitor symptoms and repeat in 2 weeks. Lifestyle changes may help."],[14,"Moderate","Discuss with a doctor or therapist. Treatment options are available."],[19,"Moderately severe","Book an appointment with a healthcare professional soon."],[27,"Severe","Contact a healthcare professional promptly."]]},
+gad:{name:"Anxiety screen",full:"GAD-7",max:21,items:["Feeling nervous, anxious, or on edge","Not being able to stop or control worrying","Worrying too much about different things","Trouble relaxing","Being so restless that it is hard to sit still","Becoming easily annoyed or irritable","Feeling afraid, as if something awful might happen"],
+bands:[[4,"Minimal","No action needed. Keep up healthy routines."],[9,"Mild","Monitor symptoms and repeat in 2 weeks. Relaxation and sleep routines may help."],[14,"Moderate","Discuss with a doctor or therapist. Treatment options are available."],[21,"Severe","Contact a healthcare professional promptly."]]}};
+const TIPS=["Keep regular sleep and wake times.","Aim for 20 to 30 minutes of physical activity most days.","Stay in contact with people you trust.","Limit caffeine and alcohol.","Practise slow breathing: in for 4 counts, out for 6."];
+let S={view:"home",queue:[],qi:0,ans:{phq:[],gad:[]},sel:["phq","gad"]};
+const $=document.getElementById("app");
+function store(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k)||"null");localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+function go(v){S.view=v;render()}
+function intro(ids){S.sel=ids;go("intro")}
+function begin(){S.queue=S.sel.flatMap(id=>TESTS[id].items.map((_,i)=>[id,i]));S.qi=0;S.ans={phq:[],gad:[]};go("quiz")}
+function pick(v){const[id,i]=S.queue[S.qi];S.ans[id][i]=v;if(S.qi+1<S.queue.length){S.qi++;render()}else finish()}
+function back(){if(S.qi>0){S.qi--;render()}else go("intro")}
+function band(id,s){const b=TESTS[id].bands,k=b.findIndex(x=>s<=x[0]);return{k,label:b[k][1],step:b[k][2]}}
+function finish(){const r={date:new Date().toISOString()};for(const id of S.sel)r[id]=S.ans[id].reduce((a,b)=>a+b,0);const h=store("steady-history")||[];h.unshift(r);store("steady-history",h.slice(0,10));S.res=r;go("result")}
+function lines(){return `<ul><li><b>India:</b> Tele-MANAS, 14416 or 1-800-891-4416 (free, 24/7)</li><li><b>United States:</b> 988 Suicide &amp; Crisis Lifeline, call or text 988</li><li><b>Other countries:</b> findahelpline.com lists services by country</li><li>In immediate danger, call your local emergency number.</li></ul>`}
+function home(){const h=store("steady-history")||[];return `
+<div class="hero"><div><h1>Understand how you have been feeling</h1>
+<p>A confidential self-assessment based on two clinically validated questionnaires. Get a clear summary of your last two weeks and a suggested next step, in about three minutes.</p>
+<button class="primary" onclick="intro(['phq','gad'])">Start full assessment</button>
+<div><button class="secondary" onclick="intro(['phq'])">Depression only</button> <button class="secondary" onclick="intro(['gad'])">Anxiety only</button></div></div>
+<div class="card"><h2>What you will get</h2><ul><li>A score and severity level for each screen</li><li>A suggested next step</li><li>A printable summary to share with a clinician</li></ul></div></div>
+<div class="facts"><div class="card"><h3>Validated tools</h3><p class="muted" style="margin:0">PHQ-9 and GAD-7 are used worldwide in primary care and research.</p></div><div class="card"><h3>Private by design</h3><p class="muted" style="margin:0">No account and no upload. Answers stay on your device.</p></div><div class="card"><h3>Not a diagnosis</h3><p class="muted" style="margin:0">Results guide a conversation with a professional.</p></div></div>
+<h2>How it works</h2><ol class="steps"><li><div><h3>Read the notice</h3><span class="muted">Confirm what the tool can and cannot do.</span></div></li><li><div><h3>Answer the questions</h3><span class="muted">Think about the last 2 weeks and choose the closest answer.</span></div></li><li><div><h3>Review your summary</h3><span class="muted">See scores, severity and suggested next steps.</span></div></li></ol>
+${h.length?`<div class="card"><h2>Previous results</h2>${h.map(r=>`<div class="row"><span>${new Date(r.date).toLocaleDateString(undefined,{day:"numeric",month:"short",year:"numeric"})}</span><span>${r.phq!=null?"PHQ-9: "+r.phq:""}${r.phq!=null&&r.gad!=null?" | ":""}${r.gad!=null?"GAD-7: "+r.gad:""}</span></div>`).join("")}<button class="link" style="margin-top:8px" onclick="store('steady-history',[]);render()">Clear history</button></div>`:""}`}
+function introV(){return `<button class="link" onclick="go('home')">Back</button><h1>Before you begin</h1><div class="notice">This is a screening tool. It cannot diagnose a condition and is not for emergencies.</div>
+<p>You will answer ${S.sel.reduce((n,id)=>n+TESTS[id].items.length,0)} questions about the last 2 weeks. Your responses are stored only in this browser.</p>
+<p>One question asks about thoughts of self-harm. If you are struggling now, please contact a helpline first:</p><div class="card">${lines()}</div>
+<button class="primary" onclick="begin()">I understand, continue</button>`}
+function quizV(){const[id,i]=S.queue[S.qi],t=TESTS[id],cur=S.ans[id][i];return `<div class="qwrap"><button class="link" onclick="back()">Back</button>
+<div class="muted">${t.name} | Question ${S.qi+1} of ${S.queue.length}</div><div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="${S.queue.length}" aria-valuenow="${S.qi+1}"><i style="width:${(S.qi+1)/S.queue.length*100}%"></i></div>
+<p class="muted" style="margin-top:22px">Over the last 2 weeks, how often have you been bothered by:</p><p class="q">${t.items[i]}</p>
+${OPTS.map((o,v)=>`<button class="opt ${cur===v?"sel":""}" onclick="pick(${v})">${o}</button>`).join("")}</div>`}
+function resultV(){const r=S.res,flag=S.sel.includes("phq")&&S.ans.phq[8]>0;
+let o=`<h1>Your assessment summary</h1><p class="muted">Completed ${new Date(r.date).toLocaleString(undefined,{dateStyle:"long",timeStyle:"short"})}</p>`;
+if(flag)o+=`<div class="crisis" role="alert"><h2>You reported thoughts of self-harm</h2><p>Thank you for answering honestly. Please speak to someone today: a trusted person, your doctor, or a crisis service.</p>${lines()}</div>`;
+o+=`<div class="card scroll"><table><thead><tr><th>Assessment</th><th>Score</th><th>Severity</th><th>Suggested next step</th></tr></thead><tbody>`;
+for(const id of S.sel){const t=TESTS[id],b=band(id,r[id]);o+=`<tr><td><b>${t.name}</b><br><span class="muted">${t.full}</span></td><td>${r[id]} / ${t.max}<div class="meter">${t.bands.map((_,j)=>`<i style="${j<=b.k?"background:"+SC[id==="gad"&&b.k>=2?b.k+1:b.k]:""}"></i>`).join("")}</div></td><td><span class="pill" style="background:${SC[id==="gad"&&b.k>=2?b.k+1:b.k]}">${b.label}</span></td><td>${b.step}</td></tr>`}
+o+=`</tbody></table></div><div class="card"><h2>Supportive habits</h2><ul>${TIPS.map(x=>`<li>${x}</li>`).join("")}</ul><p class="muted" style="margin:0">If symptoms last more than 2 weeks or affect work, study or relationships, see a healthcare professional and share this summary.</p></div>
+<div class="noprint"><button class="primary" onclick="window.print()">Print or save summary</button> <button class="secondary" onclick="go('home')">Done</button></div>`;return o}
+function helpV(){return `<button class="link" onclick="go('home')">Back</button><h1>Urgent help</h1><div class="crisis"><p>If you or someone else is in immediate danger, call your local emergency number now.</p>${lines()}</div>`}
+function render(){$.innerHTML={home,intro:introV,quiz:quizV,result:resultV,help:helpV}[S.view]();window.scrollTo(0,0)}
+render();
+</script>
+</body>
+</html>
